@@ -754,7 +754,10 @@ export class ValidationService {
         let spans = this.messageFor[input.name];
         if (spans) {
             for (let i = 0; i < spans.length; i++) {
-                spans[i].innerHTML = message;
+                const nested = document.createElement('span');
+                nested.innerText = message;
+                nested.setAttribute('id', `${input.name}-error`);
+                spans[i].appendChild(nested);
                 spans[i].className = 'field-validation-error';
             }
         }
