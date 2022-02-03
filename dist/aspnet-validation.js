@@ -755,7 +755,11 @@ var ValidationService = /** @class */ (function () {
         var spans = this.messageFor[input.name];
         if (spans) {
             for (var i = 0; i < spans.length; i++) {
-                spans[i].innerHTML = message;
+                var nested = document.createElement('span');
+                nested.innerText = message;
+                nested.setAttribute('id', input.name + "-error");
+                spans[i].innerHTML = '';
+                spans[i].appendChild(nested);
                 spans[i].className = 'field-validation-error';
             }
         }
