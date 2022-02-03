@@ -761,6 +761,8 @@ export class ValidationService {
 
         input.classList.remove('input-validation-valid');
         input.classList.add('input-validation-error');
+        input.setAttribute('aria-describedby', `${input.name}-error`);
+        input.setAttribute('aria-invalid', 'true');
 
         let uid = this.getElementUID(input);
         this.summary[uid] = message;
@@ -782,6 +784,7 @@ export class ValidationService {
 
         input.classList.remove('input-validation-error');
         input.classList.add('input-validation-valid');
+        input.setAttribute('aria-invalid', 'false');
 
         let uid = this.getElementUID(input);
         delete this.summary[uid];
@@ -823,10 +826,7 @@ export class ValidationService {
                             error = resolution;
                         }
                     } catch (ex) {
-                        if (ex instanceof Error) {
-                            error = ex.message;
-                        }
-                        else error = ex;
+                        error = (ex instanceof Error) ? ex.message : ex;
                         valid = false;
                     }
                 }

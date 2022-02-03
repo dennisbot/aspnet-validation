@@ -761,6 +761,8 @@ var ValidationService = /** @class */ (function () {
         }
         input.classList.remove('input-validation-valid');
         input.classList.add('input-validation-error');
+        input.setAttribute('aria-describedby', input.name + "-error");
+        input.setAttribute('aria-invalid', 'true');
         var uid = this.getElementUID(input);
         this.summary[uid] = message;
         this.renderSummary();
@@ -779,6 +781,7 @@ var ValidationService = /** @class */ (function () {
         }
         input.classList.remove('input-validation-error');
         input.classList.add('input-validation-valid');
+        input.setAttribute('aria-invalid', 'false');
         var uid = this.getElementUID(input);
         delete this.summary[uid];
         this.renderSummary();
@@ -835,11 +838,7 @@ var ValidationService = /** @class */ (function () {
                         return [3 /*break*/, 6];
                     case 5:
                         ex_1 = _c.sent();
-                        if (ex_1 instanceof Error) {
-                            error = ex_1.message;
-                        }
-                        else
-                            error = ex_1;
+                        error = (ex_1 instanceof Error) ? ex_1.message : ex_1;
                         valid = false;
                         return [3 /*break*/, 6];
                     case 6:
