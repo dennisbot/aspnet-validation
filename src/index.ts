@@ -850,6 +850,7 @@ export class ValidationService {
      * Load default validation providers and scans the entire document when ready.
      */
     bootstrap() {
+        console.log('local mode activated!');
         this.addMvcProviders();
 
         window.addEventListener('load', event => {
